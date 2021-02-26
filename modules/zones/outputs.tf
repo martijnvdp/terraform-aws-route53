@@ -12,3 +12,8 @@ output "this_route53_zone_name" {
   description = "Name of Route53 zone"
   value       = { for k, v in aws_route53_zone.this : k => v.name }
 }
+
+output "this_route53_zone_name_tld" {
+  description = "Name of Route53 zone with associated tld name"
+  value       = { for k, v in aws_route53_zone.this : k => regex("([^.s]+.[^.s]+$)", k)[0] }
+}
